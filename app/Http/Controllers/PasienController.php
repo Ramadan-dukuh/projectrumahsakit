@@ -56,8 +56,8 @@ class PasienController extends Controller
         try {
             Pasien::create(array_merge($request->all(), ['usiaPasien' => $usia]));
             $ruangan->decrement('dayaTampung', 1);
-            
-            return redirect()->route('pasiens.index')->with('success', 'Pasien berhasil ditambahkan');
+
+            return redirect()->route('operator.pasiens.index')->with('success', 'Pasien berhasil ditambahkan');
         } catch (\Exception $e) {
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
@@ -136,8 +136,8 @@ class PasienController extends Controller
             $ruangan->increment('dayaTampung', 1);
         }
     }
-    
-    return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil diupdate');
+
+    return redirect()->route('operator.pasiens.index')->with('success', 'Data pasien berhasil diupdate');
 }
 
 
@@ -150,8 +150,8 @@ class PasienController extends Controller
         }
         
         $pasien->delete();
-        
-        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil dihapus');
+
+        return redirect()->route('operator.pasiens.index')->with('success', 'Data pasien berhasil dihapus');
     }
 
     // Tambahan method untuk menandai pasien keluar
@@ -159,7 +159,7 @@ class PasienController extends Controller
         $pasien = Pasien::findOrFail($id);
         
         if ($pasien->status == 'pulang') {
-            return redirect()->route('pasiens.index')->with('info', 'Pasien sudah ditandai sebagai pulang sebelumnya.');
+            return redirect()->route('operator.pasiens.index')->with('info', 'Pasien sudah ditandai sebagai pulang sebelumnya.');
         }
         
         $pasien->status = 'pulang';
@@ -171,6 +171,6 @@ class PasienController extends Controller
             $ruangan->increment('dayaTampung', 1);
         }
         
-        return redirect()->route('pasiens.index')->with('success', 'Pasien berhasil ditandai sebagai pulang dan kapasitas kamar dikembalikan.');
+        return redirect()->route('operator.pasiens.index')->with('success', 'Pasien berhasil ditandai sebagai pulang dan kapasitas kamar dikembalikan.');
     }
 }

@@ -55,7 +55,7 @@
         </tr>
     </table>
 
-    <a href="{{ route('pasiens.index') }}" class="btn btn-secondary">Kembali</a>
-    <a href="{{ route('pasiens.edit', $pasien->id) }}" class="btn btn-warning">Edit</a>
+    <a href="{{ route('operator.pasiens.index') }}" class="btn btn-secondary">Kembali</a>
+    <a href="{{ route('operator.pasiens.edit', $pasien->id) }}" class="btn btn-warning">Edit</a>
 </div>
 @endsection

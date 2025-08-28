@@ -8,7 +8,7 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <form action="{{ route('pasiens.store') }}" method="POST" id="pasienForm">
+    <form action="{{ route('operator.pasiens.store') }}" method="POST" id="pasienForm">
         @csrf
         <div class="mb-3">
             <label>No Rekam Medis</label>
@@ -84,7 +84,7 @@
             </select>
         </div>
         <button class="btn btn-primary">Simpan</button>
-        <a href="{{ route('pasiens.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('operator.pasiens.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 

@@ -21,4 +21,10 @@ class Pasien extends Model
     public function ruangan() {
         return $this->belongsTo(Ruangan::class, 'nomorKamar', 'kodeRuangan');
     }
+    public function kunjungan() {
+    return $this->hasMany(Kunjungan::class);
+}
+public function riwayat() {
+    return $this->hasMany(RiwayatPerawatan::class);
+}
 }

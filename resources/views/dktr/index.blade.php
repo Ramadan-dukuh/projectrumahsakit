@@ -100,7 +100,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="mb-0"><i class="bi bi-heart-pulse me-2"></i>Data Dokter</h2>
-                <a href="{{ route('dktr.create') }}" class="btn btn-light">
+                <a href="{{ route('operator.dktr.create') }}" class="btn btn-light">
                     <i class="bi bi-plus-circle me-1"></i> Input Dokter
                 </a>
             </div>
@@ -147,11 +147,11 @@
                                     <span class="badge-spesialis">{{ $dokter->spesialisasi }}</span>
                                 </td>
                                 <td class="text-center action-buttons">
-                                    <form action="{{ route('dktr.destroy', $dokter->id) }}" method="post" class="d-inline">
-                                        <a href="{{ route('dktr.show', $dokter->id) }}" class="btn btn-sm btn-outline-primary" title="Detail">
+                                    <form action="{{ route('operator.dktr.destroy', $dokter->id) }}" method="post" class="d-inline">
+                                        <a href="{{ route('operator.dktr.show', $dokter->id) }}" class="btn btn-sm btn-outline-primary" title="Detail">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{ route('dktr.edit', $dokter->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
+                                        <a href="{{ route('operator.dktr.edit', $dokter->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         @csrf

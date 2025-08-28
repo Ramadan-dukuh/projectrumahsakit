@@ -42,7 +42,7 @@ class DokterControllers extends Controller
             ]
             );
         Dokter::create($request->all());
-        return redirect()->route('dktr.index')->with('success','Data Berhasil Ditambahkan');
+        return redirect()->route('operator.dktr.index')->with('success','Data Berhasil Ditambahkan');
     }
 
     /**
@@ -85,7 +85,7 @@ class DokterControllers extends Controller
             ]
             );
             $dktr->update($request->all());
-            return redirect()->route('dktr.index')->with('success','Data Berhasil Diubah');
+            return redirect()->route('operator.dktr.index')->with('success','Data Berhasil Diubah');
     }
 
     /**

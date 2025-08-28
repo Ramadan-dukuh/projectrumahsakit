@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Data Dokter</title>
+    <title>Dashboard User - Sistem Rumah Sakit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * {
@@ -20,6 +22,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background-color: #f8fafc;
         }
 
         /* Header Styles - Updated to match landing page */
@@ -172,6 +175,16 @@
             padding-bottom: 2rem;
         }
 
+        /* Dashboard specific styles */
+        .dashboard-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
         /* Footer */
         footer {
             background: #1f2937;
@@ -245,163 +258,89 @@
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <nav>
-            <a href="{{ route('dktr.landing') }}" class="logo">RS Sehat Prima</a>
-            <button class="mobile-menu-btn">☰</button>
-            <ul class="nav-menu">
-    @if(auth()->user()->role === 'operator')
-        <li>
-            <a href="{{ route('operator.dashboard') }}" class="py-4 text-blue-600 border-b-2 border-blue-600 font-medium">
-                <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('operator.pasiens.index') }}" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-user-injured mr-2"></i>Pasien
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('operator.dktr.index') }}" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-user-md mr-2"></i>Dokter
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('operator.ruangan.index') }}" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-bed mr-2"></i>Ruangan
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('operator.kunjungan') }}" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-calendar-check mr-2"></i>Kunjungan
-            </a>
-        </li>
+    @extends('template')    
+     @section('content')
 
-    @elseif(auth()->user()->role === 'dokter')
-        <li>
-            <a href="{{ route('dokter.dashboard') }}" class="py-4 text-blue-600 border-b-2 border-blue-600 font-medium">
-                <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('dokter.perawatan.list') }}" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-notes-medical mr-2"></i>Perawatan
-            </a>
-        </li>
-        <li>
-            <a href="#" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-calendar-check mr-2"></i>Jadwal
-            </a>
-        </li>
-        <li>
-            <a href="#" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-file-medical mr-2"></i>Rekam Medis
-            </a>
-        </li>
-
-        @elseif(auth()->user()->role === 'user')
-        <li>
-            <a href="{{ route('user.dashboard') }}" class="py-4 text-blue-600 border-b-2 border-blue-600 font-medium">
-                <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('kunjungan.index') }}" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-notes-medical mr-2"></i>Kunjungan
-            </a>
-        </li>
-        <li>
-            <a href="" class="py-4 text-gray-600 hover:text-blue-600">
-                <i class="fas fa-user-injured mr-2"></i>Registrasi
-            </a>
-        </li>
-
-    @else
-        {{-- Default nav jika role tidak cocok --}}
-        <li class="nav-item"><a class="nav-link" href="{{ route('dktr.landing') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#igd">IGD</a></li>
-        <li class="nav-item"><a class="nav-link" href="">Dokter</a></li>
-        <li class="nav-item"><a class="nav-link" href="">Pasien</a></li>
-        <li class="nav-item"><a class="nav-link" href="">Ruang Rawat</a></li>
-        <li class="nav-item"><a class="nav-link" href="#pendaftaran">Pendaftaran</a></li>
-    @endif
-
-    {{-- Dropdown profil tetap sama untuk semua role --}}
-    <li class="nav-item dropdown">
-        <a class="profile-dropdown" href="#">
-            @if(auth()->user()->photo)
-                <img src="{{ asset('storage/' . auth()->user()->photo) }}" class="profile-img me-1">
-            @else
-                <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=random" class="profile-img me-1">
-            @endif
-            {{ auth()->user()->name }}
-        </a>
-        <div class="dropdown-content">
-            <a href="{{ route('profile.edit') }}">Profil Saya</a>
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
-        </div>
-    </li>
-</ul>
-
-        </nav>
-    </header>
-
-    <div class="container">
-        @yield('content')
-    </div>
-    
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>RS Sehat Prima</h3>
-                    <p>Jl. Sehat Sejahtera No. 123<br>
-                    Jakarta Selatan 12345<br>
-                    Telp: (021) 123-4567<br>
-                    Email: info@rssehatprima.com</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Layanan</h3>
-                    <p>
-                        <a href="#igd">IGD 24 Jam</a><br>
-                        <a href="#dokter">Poliklinik Spesialis</a><br>
-                        <a href="#ruang-rawat">Rawat Inap</a><br>
-                        <a href="#pendaftaran">Pendaftaran Online</a>
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Informasi</h3>
-                    <p>
-                        <a href="#">Jadwal Dokter</a><br>
-                        <a href="#">Tarif Pelayanan</a><br>
-                        <a href="#">Fasilitas</a><br>
-                        <a href="#">Cara Pendaftaran</a>
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Jam Operasional</h3>
-                    <p>
-                        IGD: 24 Jam<br>
-                        Poliklinik: 08.00 - 20.00<br>
-                        Administrasi: 07.00 - 21.00<br>
-                        Farmasi: 06.00 - 22.00
-                    </p>
-                </div>
-            </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 dashboard-card">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard User</h2>
             
-            <div class="footer-bottom">
-                <p>&copy; 2025 RS Sehat Prima. Semua hak cipta dilindungi undang-undang.</p>
+            <!-- Welcome Section -->
+            <div class="bg-red-50 rounded-lg p-6 mb-8">
+                <div class="flex items-center">
+                    <div class="bg-red-100 p-4 rounded-full mr-4">
+                        <i class="fas fa-user-injured text-red-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">Selamat Datang, {{ Auth::user()->name }}!</h3>
+                        <p class="text-gray-600">Ini adalah dashboard Anda untuk mengelola kunjungan dan informasi kesehatan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow dashboard-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-calendar-plus text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Request Kunjungan</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Ajukan kunjungan baru ke dokter untuk konsultasi atau perawatan.</p>
+                    <a href="{{ route('kunjungan.create') }}" class="inline-flex items-center text-green-600 hover:text-green-700">
+                        <span>Ajukan Sekarang</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow dashboard-card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-history text-blue-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Riwayat Kunjungan</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Lihat dan kelola semua riwayat kunjungan Anda ke rumah sakit.</p>
+                    <a href="{{ route('kunjungan.index') }}" class="inline-flex items-center text-blue-600 hover:text-blue-700">
+                        <span>Lihat Riwayat</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Profile Information -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Informasi Profil</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Nama Lengkap</p>
+                        <p class="font-medium">{{ Auth::user()->name }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Email</p>
+                        <p class="font-medium">{{ Auth::user()->email }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Role</p>
+                        <p class="font-medium capitalize">{{ Auth::user()->role }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Bergabung Pada</p>
+                        <p class="font-medium">{{ Auth::user()->created_at->format('d M Y') }}</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                        <i class="fas fa-edit mr-2"></i> Edit Profil
+                    </a>
+                </div>
             </div>
         </div>
-    </footer>
+    </main>
+ 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -437,5 +376,6 @@
             });
         });
     </script>
+    @endsection
 </body>
 </html>

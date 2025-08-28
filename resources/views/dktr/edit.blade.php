@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h3 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Edit Data Dokter</h3>
-            <a href="{{ route('dktr.index') }}" class="btn btn-light">
+            <a href="{{ route('operator.dktr.index') }}" class="btn btn-light">
                 <i class="bi bi-arrow-left me-1"></i> Kembali
             </a>
         </div>
@@ -23,7 +23,7 @@
             </div>
             @endif
 
-            <form action="{{ route('dktr.update', $dktr->id) }}" method="POST">
+            <form action="{{ route('operator.dktr.update', $dktr->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 

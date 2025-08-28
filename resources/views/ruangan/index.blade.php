@@ -114,7 +114,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="mb-0"><i class="bi bi-building me-2"></i>Data Ruangan</h2>
-                <a href="{{ route('ruangan.create') }}" class="btn btn-light">
+                <a href="{{ route('operator.ruangan.create') }}" class="btn btn-light">
                     <i class="bi bi-plus-circle me-1"></i> Tambah Ruangan
                 </a>
             </div>
@@ -162,13 +162,13 @@
                                         <span class="badge-lokasi">{{ $r->lokasi }}</span>
                                     </td>
                                     <td class="text-center action-buttons">
-                                        <a href="{{ route('ruangan.show', $r->id) }}" class="btn btn-sm btn-outline-primary" title="Detail">
+                                        <a href="{{ route('operator.ruangan.show', $r->id) }}" class="btn btn-sm btn-outline-primary" title="Detail">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{ route('ruangan.edit', $r->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
+                                        <a href="{{ route('operator.ruangan.edit', $r->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <form action="{{ route('ruangan.destroy', $r->id) }}" method="POST" style="display:inline">
+                                        <form action="{{ route('operator.ruangan.destroy', $r->id) }}" method="POST" style="display:inline">
                                             @csrf 
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-outline-danger" type="submit" title="Hapus" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')">

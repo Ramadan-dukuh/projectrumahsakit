@@ -19,7 +19,9 @@ class Dokter extends Model
         'jamPraktik',
     ];
 
-   
+   public function riwayat() {
+    return $this->hasMany(RiwayatPerawatan::class);
+}
 
 
 }

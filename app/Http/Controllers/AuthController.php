@@ -18,7 +18,14 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->route('dktr.landing'); // jika sudah login
+            // Redirect berdasarkan role
+            $user = Auth::user();
+            if ($user->role === 'operator') {
+                return redirect()->route('operator.dashboard');
+            } elseif ($user->role === 'dokter') {
+                return redirect()->route('dokter.dashboard');
+            }
+            return redirect()->route('user.dashboard');
         }
         return view('auth.login');
     }
@@ -33,7 +40,16 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dktr.landing')->with('success', 'Login berhasil!');
+            
+            // Redirect berdasarkan role
+            $user = Auth::user();
+            if ($user->role === 'operator') {
+                return redirect()->route('operator.dashboard')->with('success', 'Login berhasil!');
+            } elseif ($user->role === 'dokter') {
+                return redirect()->route('dokter.dashboard')->with('success', 'Login berhasil!');
+            }
+            
+            return redirect()->route('user.dashboard')->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([
@@ -45,7 +61,14 @@ class AuthController extends Controller
     public function register()
     {
         if (Auth::check()) {
-            return redirect()->route('dktr.index'); // jika sudah login
+            // Redirect berdasarkan role
+            $user = Auth::user();
+            if ($user->role === 'operator') {
+                return redirect()->route('operator.dashboard');
+            } elseif ($user->role === 'dokter') {
+                return redirect()->route('dokter.dashboard');
+            }
+            return redirect()->route('user.dashboard');
         }
         return view('auth.register');
     }
@@ -56,7 +79,8 @@ class AuthController extends Controller
         $data = $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed', // password_confirmation harus ada di form
+            'password' => 'required|min:6|confirmed',
+            'role'     => 'required|in:user,operator,dokter',
         ]);
 
         // Buat user baru
@@ -64,6 +88,7 @@ class AuthController extends Controller
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => Hash::make($data['password']),
+            'role'     => $data['role'],
         ]);
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');

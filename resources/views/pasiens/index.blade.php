@@ -122,7 +122,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="mb-0"><i class="bi bi-people-fill me-2"></i>Data Pasien</h2>
-                <a href="{{ route('pasiens.create') }}" class="btn btn-light">
+                <a href="{{ route('operator.pasiens.create') }}" class="btn btn-light">
                     <i class="bi bi-plus-circle me-1"></i> Tambah Pasien
                 </a>
             </div>
@@ -180,13 +180,13 @@
                                     @endif
                                 </td>
                                 <td class="text-center action-buttons">
-                                    <a href="{{ route('pasiens.show', $p->id) }}" class="btn btn-sm btn-outline-primary" title="Detail">
+                                    <a href="{{ route('operator.pasiens.show', $p->id) }}" class="btn btn-sm btn-outline-primary" title="Detail">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                    <a href="{{ route('pasiens.edit', $p->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
+                                    <a href="{{ route('operator.pasiens.edit', $p->id) }}" class="btn btn-sm btn-outline-warning" title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{ route('pasiens.destroy', $p->id) }}" method="POST" style="display:inline-block">
+                                    <form action="{{ route('operator.pasiens.destroy', $p->id) }}" method="POST" style="display:inline-block">
                                         @csrf 
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-outline-danger" type="submit" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data pasien ini?')">

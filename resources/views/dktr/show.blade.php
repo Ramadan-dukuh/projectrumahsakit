@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h3 class="mb-0"><i class="bi bi-person-badge me-2"></i>Detail Dokter</h3>
-            <a href="{{ route('dktr.index') }}" class="btn btn-light">
+            <a href="{{ route('operator.dktr.index') }}" class="btn btn-light">
                 <i class="bi bi-arrow-left me-1"></i> Kembali
             </a>
         </div>
@@ -63,10 +63,10 @@
             </div>
             
             <div class="d-flex justify-content-end mt-3">
-                <a href="{{ route('dktr.edit', $dktr->id) }}" class="btn btn-warning me-2">
+                <a href="{{ route('operator.dktr.edit', $dktr->id) }}" class="btn btn-warning me-2">
                     <i class="bi bi-pencil-square me-1"></i> Edit Data
                 </a>
-                <form action="{{ route('dktr.destroy', $dktr->id) }}" method="POST">
+                <form action="{{ route('operator.dktr.destroy', $dktr->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data dokter ini?')">

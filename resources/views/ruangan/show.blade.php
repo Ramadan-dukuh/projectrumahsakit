@@ -98,7 +98,7 @@
                 <div class="card detail-card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h2 class="mb-0"><i class="bi bi-door-open me-2"></i>Detail Ruangan</h2>
-                        <a href="{{ route('ruangan.index') }}" class="btn btn-light">
+                        <a href="{{ route('operator.ruangan.index') }}" class="btn btn-light">
                             <i class="bi bi-arrow-left me-1"></i> Kembali ke Daftar
                         </a>
                     </div>
@@ -172,13 +172,13 @@
                     <!-- Action Buttons -->
                     <div class="card-footer bg-light">
                         <div class="d-flex justify-content-center action-buttons">
-                            <a href="{{ route('ruangan.index') }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('operator.ruangan.index') }}" class="btn btn-outline-secondary">
                                 <i class="bi bi-list me-1"></i> Daftar Ruangan
                             </a>
-                            <a href="{{ route('ruangan.edit', $ruangan->id) }}" class="btn btn-outline-primary">
+                            <a href="{{ route('operator.ruangan.edit', $ruangan->id) }}" class="btn btn-outline-primary">
                                 <i class="bi bi-pencil me-1"></i> Edit
                             </a>
-                            <form action="{{ route('ruangan.destroy', $ruangan->id) }}" method="POST" style="display:inline">
+                            <form action="{{ route('operator.ruangan.destroy', $ruangan->id) }}" method="POST" style="display:inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?')">

@@ -85,7 +85,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h2 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Edit Data Ruangan</h2>
-                        <a href="{{ route('ruangan.index') }}" class="btn btn-light">
+                        <a href="{{ route('operator.ruangan.index') }}" class="btn btn-light">
                             <i class="bi bi-arrow-left me-1"></i> Kembali
                         </a>
                     </div>
@@ -125,7 +125,7 @@
                         </div>
                         @endif
                         
-                        <form action="{{ route('ruangan.update', $ruangan->id) }}" method="POST">
+                        <form action="{{ route('operator.ruangan.update', $ruangan->id) }}" method="POST">
                             @csrf 
                             @method('PUT')
                             
@@ -172,7 +172,7 @@
                             
                             <div class="form-section mt-4">
                                 <div class="d-flex justify-content-end gap-2">
-                                    <a href="{{ route('ruangan.index') }}" class="btn btn-outline-secondary">
+                                    <a href="{{ route('operator.ruangan.index') }}" class="btn btn-outline-secondary">
                                         <i class="bi bi-x-circle me-1"></i> Batal
                                     </a>
                                     <button type="reset" class="btn btn-outline-warning">

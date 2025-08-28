@@ -27,7 +27,7 @@ class RuanganController extends Controller
         ]);
 
         Ruangan::create($request->all());
-        return redirect()->route('ruangan.index')->with('success', 'Data ruangan berhasil ditambahkan');
+        return redirect()->route('operator.ruangan.index')->with('success', 'Data ruangan berhasil ditambahkan');
     }
 
     public function show(Ruangan $ruangan)
@@ -50,7 +50,7 @@ class RuanganController extends Controller
         ]);
 
         $ruangan->update($request->all());
-        return redirect()->route('ruangan.index')->with('success', 'Data ruangan berhasil diupdate');
+        return redirect()->route('operator.ruangan.index')->with('success', 'Data ruangan berhasil diupdate');
     }
 
     public function destroy(Ruangan $ruangan)
